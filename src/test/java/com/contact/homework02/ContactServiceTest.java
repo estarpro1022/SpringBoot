@@ -24,7 +24,6 @@ import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ContactConfig.class)
-@SpringBootTest
 public class ContactServiceTest {
     @Autowired
     private ContactService contactService;

@@ -13,15 +13,4 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @Configuration
 @ComponentScan
 public class ContactConfig {
-    @Bean
-    LettuceConnectionFactory redisConnectionFactory() {
-        return new LettuceConnectionFactory();
-    }
-
-    @Bean
-    RedisTemplate<String, Contact> getRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Contact> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        return template;
-    }
 }

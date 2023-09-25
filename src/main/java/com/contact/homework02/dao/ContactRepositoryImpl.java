@@ -12,26 +12,18 @@ import java.util.List;
 public class ContactRepositoryImpl implements ContactRepository {
     List<Contact> contacts = new ArrayList<>();
 
-    @Autowired
-    private RedisTemplate<String, Contact> redisTemplate;
-
     @Override
     public List<Contact> findAll() {
-        return redisTemplate.opsForList().range("contact", 0, -1);
-//        redisTemplate.opsForList().leftPush("contact", new Contact());
-//        return contacts;
+        return contacts;
     }
 
     @Override
     public void save(Contact contact) {
-//        redisTemplate.opsForList().rightPush("contact", contact);
-//        contacts.add(contact);
-        redisTemplate.opsForList().rightPush("contact", contact);
+        contacts.add(contact);
     }
 
     @Override
     public void clear() {
-        redisTemplate.delete("contact");
-//        contacts.clear();
+        contacts.clear();
     }
 }
