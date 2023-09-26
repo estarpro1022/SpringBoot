@@ -1,7 +1,7 @@
-package com.contact.homework02.service;
+package com.homework.service;
 
-import com.contact.homework02.dao.ContactRepository;
-import com.contact.homework02.data.Contact;
+import com.homework.dao.ContactRepository;
+import com.homework.data.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
-package com.contact.homework02.dao;
+package com.homework.dao;
 
-import com.contact.homework02.data.Contact;
+import com.homework.data.Contact;
 
 import java.util.List;
 

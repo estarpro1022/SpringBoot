@@ -1,6 +1,6 @@
-package com.contact.homework02.service;
+package com.homework.service;
 
-import com.contact.homework02.data.Contact;
+import com.homework.data.Contact;
 
 import java.util.List;
 

@@ -1,20 +1,16 @@
-package com.contact.homework02;
+package com.homework;
 
-import com.contact.homework02.dao.ContactRepository;
-import com.contact.homework02.data.Contact;
-import com.contact.homework02.service.ContactService;
+import com.homework.dao.ContactRepository;
+import com.homework.data.Contact;
+import com.homework.service.ContactService;
 import com.github.javafaker.Faker;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.data.redis.core.mapping.RedisMappingContext.*;
-import org.springframework.data.keyvalue.core.mapping.KeySpaceResolver;
 
 import java.util.List;
 import java.util.Locale;

@@ -1,4 +1,4 @@
-package com.contact.homework02.data;
+package com.homework.data;
 
 import java.io.Serializable;
 import java.util.Objects;

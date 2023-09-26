@@ -1,8 +1,6 @@
-package com.contact.homework02.dao;
+package com.homework.dao;
 
-import com.contact.homework02.data.Contact;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import com.homework.data.Contact;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
