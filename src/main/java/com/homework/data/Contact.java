@@ -1,76 +1,29 @@
 package com.homework.data;
 
+import jakarta.validation.constraints.*;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Data
 public class Contact implements Serializable {
+//    @NotNull
     private Long id;
+
+    @Size(min = 1, message = "姓名长度至少为1")
     private String firstName;
+
+    @Size(min = 1, message = "姓名长度至少为1")
     private String lastName;
+
+    @NotBlank(message = "手机号不能为空")
+    @Size(min = 11, max = 11, message = "手机号格式错误")
     private String phoneNumber;
+
+    @NotBlank
+    @Email(message = "请输入有效邮箱")
     private String emailAddress;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName) && Objects.equals(phoneNumber, contact.phoneNumber) && Objects.equals(emailAddress, contact.emailAddress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, phoneNumber, emailAddress);
-    }
 }

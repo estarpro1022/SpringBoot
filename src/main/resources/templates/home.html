@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="margin">
+<h1>联系人添加和删除</h1>
+<form method="POST" th:object="${contact}">
+    <div>
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" th:field="*{firstName}">
+        <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        <br>
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" th:field="*{lastName}">
+        <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        <br>
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" th:field="*{phoneNumber}">
+        <span class="error" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+        <br>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" th:field="*{emailAddress}">
+        <span class="error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
+    </div>
+
+    <button>添加</button>
+</form>
+
+<div th:each="contact: ${contacts}">
+    <span th:text="${contact.firstName}"> </span>
+    <span th:text="${contact.lastName}"> </span>
+    <span th:text="${contact.phoneNumber}"> </span>
+    <span th:text="${contact.getEmailAddress()}"> </span>
+</div>
+</body>
+</html>

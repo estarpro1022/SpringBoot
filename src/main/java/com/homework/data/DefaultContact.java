@@ -1,4 +1,4 @@
-package com.homework;
+package com.homework.data;
 
 
 import com.homework.data.Contact;
