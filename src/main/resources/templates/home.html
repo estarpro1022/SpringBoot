@@ -5,37 +5,92 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/style.css"/>
+    <link rel="stylesheet" href="/static/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body class="margin">
-<h1>联系人添加和删除</h1>
-<form method="POST" th:object="${contact}">
-    <div>
-        <label for="first_name">First Name</label>
-        <input type="text" id="first_name" name="first_name" th:field="*{firstName}">
-        <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-        <br>
-        <label for="last_name">Last Name</label>
-        <input type="text" id="last_name" name="last_name" th:field="*{lastName}">
-        <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-        <br>
-        <label for="phone">Phone Number</label>
-        <input type="text" id="phone" name="phone" th:field="*{phoneNumber}">
-        <span class="error" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
-        <br>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" th:field="*{emailAddress}">
-        <span class="error" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}"></span>
-    </div>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td width="50%">
+            <h1 class="mb-3 horizontal_blank vertical_blank">新增联系人</h1>
+            <form id="fill_contact" method="POST" th:object="${contact}">
+                <div class="horizontal_blank">
+                    <div class="mb-3">
+                        <label class="form-label" for="first_name">First Name</label><br>
+                        <input class="form-control" type="text" id="first_name" name="first_name"
+                               th:field="*{firstName}" placeholder="">
+                        <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                    </div>
 
-    <button>添加</button>
-</form>
+                    <div class="mb-3">
+                        <label class="form-label" for="last_name">Last Name</label><br>
+                        <input class="form-control" type="text" id="last_name" name="last_name" th:field="*{lastName}">
+                        <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                    </div>
 
-<div th:each="contact: ${contacts}">
-    <span th:text="${contact.firstName}"> </span>
-    <span th:text="${contact.lastName}"> </span>
-    <span th:text="${contact.phoneNumber}"> </span>
-    <span th:text="${contact.getEmailAddress()}"> </span>
-</div>
+                    <div class="mb-3">
+                        <label class="form-label" for="phone">Phone Number</label><br>
+                        <input class="form-control" type="text" id="phone" name="phone" th:field="*{phoneNumber}">
+                        <span class="error" th:if="${#fields.hasErrors('phoneNumber')}"
+                              th:errors="*{phoneNumber}"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="email">Email</label><br>
+                        <input class="form-control" type="text" id="email" name="email" th:field="*{emailAddress}">
+                        <span class="error" th:if="${#fields.hasErrors('emailAddress')}"
+                              th:errors="*{emailAddress}"></span>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary mb-3 mt-3" form="fill_contact">添加</button>
+                        <button class="btn btn-secondary mx-3" type="reset" form="fill_contact">重置</button>
+                        <button class="btn btn-primary my-3 display_btn" type="button" id="display">显示列表</button>
+                    </div>
+                </div>
+            </form>
+
+        </td>
+
+        <td>
+            <table class="table table-striped" id="table">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                </tr>
+                <tr th:each="contact: ${contacts}">
+                    <td th:text="${contact.id}"></td>
+                    <td th:text="${contact.firstName}"></td>
+                    <td th:text="${contact.lastName}"></td>
+                    <td th:text="${contact.phoneNumber}"></td>
+                    <td th:text="${contact.getEmailAddress()}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous">
+</script>
+<script>
+    let isDisplay = true;
+    let table = document.getElementById("table");
+    document.getElementById("display").addEventListener('click', function () {
+        if (isDisplay) {
+            table.style.visibility = "hidden";
+            isDisplay = false;
+        } else {
+            table.style.visibility = "visible";
+            isDisplay = true;
+        }
+    });
+</script>
 </body>
 </html>

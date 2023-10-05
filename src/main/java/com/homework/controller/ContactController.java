@@ -19,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 public class ContactController {
     private final ContactService contactService;
 
+
     @Autowired
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
@@ -26,10 +27,8 @@ public class ContactController {
 
     @ModelAttribute
     public void addAttribute(Model model) {
-//        log.info("contact number: " + contactService.getAll().size());
-//        model.addAttribute("id", (long) contactService.getAll().size());
-        model.addAttribute("numbers", contactService.getAll().size());
         model.addAttribute("contacts", contactService.getAll());
+        model.addAttribute("display", true);
     }
 
     @ModelAttribute(name = "contact")
@@ -50,11 +49,16 @@ public class ContactController {
             return "home";
         }
 
-        contact.setId((long) contactService.getAll().size());
+        contact.setId((long) (contactService.getAll().size() + 1));
         contactService.add(contact);
         log.info("add a Contact: " + contact);
-//        contact.setId((Long) model.getAttribute("id"));
-//        status.setComplete();
+        return "redirect:/";
+    }
+
+    @PostMapping("/display")
+    public String display(Model model) {
+        log.info("click display button.");
+        model.addAttribute("display", true);
         return "redirect:/";
     }
 }
