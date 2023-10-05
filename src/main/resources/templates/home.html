@@ -19,27 +19,27 @@
                 <div class="horizontal_blank">
                     <div class="mb-3">
                         <label class="form-label" for="first_name">First Name</label><br>
-                        <input class="form-control" type="text" id="first_name" name="first_name"
+                        <input class="form-control" type="text" id="first_name" th:name="first_name"
                                th:field="*{firstName}" placeholder="">
                         <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="last_name">Last Name</label><br>
-                        <input class="form-control" type="text" id="last_name" name="last_name" th:field="*{lastName}">
+                        <input class="form-control" type="text" id="last_name" th:name="last_name" th:field="*{lastName}">
                         <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="phone">Phone Number</label><br>
-                        <input class="form-control" type="text" id="phone" name="phone" th:field="*{phoneNumber}">
+                        <input class="form-control" type="text" id="phone" th:name="phone" th:field="*{phoneNumber}">
                         <span class="error" th:if="${#fields.hasErrors('phoneNumber')}"
                               th:errors="*{phoneNumber}"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="email">Email</label><br>
-                        <input class="form-control" type="text" id="email" name="email" th:field="*{emailAddress}">
+                        <input class="form-control" type="text" id="email" th:name="email" th:field="*{emailAddress}">
                         <span class="error" th:if="${#fields.hasErrors('emailAddress')}"
                               th:errors="*{emailAddress}"></span>
                     </div>
