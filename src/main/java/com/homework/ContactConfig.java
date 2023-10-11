@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.FilterType;
 
-@Configuration
-@ComponentScan(basePackages = "com.homework", excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Aspect.class))
+@ComponentScan
 public class ContactConfig {
 }

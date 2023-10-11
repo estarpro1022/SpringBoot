@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
 public class ContactController {
     private final ContactService contactService;
 
