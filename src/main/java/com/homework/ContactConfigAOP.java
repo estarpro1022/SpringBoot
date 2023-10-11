@@ -1,14 +1,14 @@
 package com.homework;
 
-import com.homework.data.DefaultContact;
+import com.homework.data.DefaultContactAspect;
 import org.springframework.context.annotation.*;
 
-//@Configuration
-//@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION, value = Configuration.class)})
-//@EnableAspectJAutoProxy
+@Configuration
+@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = ContactConfig.class)})
+@EnableAspectJAutoProxy
 public class ContactConfigAOP {
-//    @Bean
-//    public DefaultContact getDefaultContact() {
-//        return new DefaultContact();
-//    }
+    @Bean
+    public DefaultContactAspect getDefaultContact() {
+        return new DefaultContactAspect();
+    }
 }

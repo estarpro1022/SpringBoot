@@ -1,14 +1,24 @@
 package com.homework.data;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Data
+@Entity
+//@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Contact implements Serializable {
-//    @NotNull
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -28,5 +38,11 @@ public class Contact implements Serializable {
     @Email(message = "请输入有效邮箱")
     private String emailAddress;
 
+    public Contact(String fn, String ln, String pn, String ea) {
+        firstName = fn;
+        lastName = ln;
+        phoneNumber = pn;
+        emailAddress = ea;
+    }
 
 }

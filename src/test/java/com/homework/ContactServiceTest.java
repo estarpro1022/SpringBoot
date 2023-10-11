@@ -31,7 +31,7 @@ public class ContactServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        contactRepository.clear();
+        contactRepository.deleteAll();
     }
 
     @After
@@ -71,7 +71,7 @@ public class ContactServiceTest {
     private Contact generateContact() {
         id++;
 
-        Faker faker = new Faker(Locale.ENGLISH);
+        Faker faker = new Faker(Locale.CHINA);
 
         Contact contact = new Contact();
         contact.setId(id);
