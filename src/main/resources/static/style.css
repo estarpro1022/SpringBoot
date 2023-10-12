@@ -1,0 +1,39 @@
+.background {
+    background-color: #e7e9eb
+}
+.align {
+    text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+.both_side_blank {
+    margin: 10% 40%;
+}
+
+.horizontal_blank {
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.vertical_blank {
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+.margin_around {
+    margin: 1rem 0;
+}
+
+.submit_btn {
+    border: 1px solid;
+    border-radius: 4px;
+    margin: 1rem 0;
+    padding: 0.25rem 0.5rem;
+}
+
+.display_btn {
+    float: right;
+}

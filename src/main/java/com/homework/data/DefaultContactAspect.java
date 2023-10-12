@@ -1,7 +1,6 @@
-package com.homework;
+package com.homework.data;
 
 
-import com.homework.data.Contact;
 import com.homework.utils.GetContact;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import java.util.List;
 
 @Aspect
-public class DefaultContact {
+public class DefaultContactAspect {
     @Pointcut("execution(* com.homework.service.ContactService.getAll( .. ))")
     public void getAll() {}
 

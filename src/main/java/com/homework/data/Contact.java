@@ -1,76 +1,48 @@
 package com.homework.data;
 
-import java.io.Serializable;
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Primary;
 
+import java.io.Serializable;
+
+@Data
+@Entity
+@NoArgsConstructor
 public class Contact implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Size(min = 1, max=50, message = "姓名长度至少为2")
     private String firstName;
+
+    @NotNull
+    @Size(min = 1, max=50, message = "姓名长度至少为1")
     private String lastName;
+
+    @NotNull
+    @Size(min = 11, max = 11, message = "手机号格式错误")
     private String phoneNumber;
+
+    @NotNull
+    @NotBlank(message = "邮箱不为空")
+    @Email(message = "请输入有效邮箱")
     private String emailAddress;
 
-    public void setId(Long id) {
-        this.id = id;
+    public Contact(String fn, String ln, String pn, String ea) {
+        firstName = fn;
+        lastName = ln;
+        phoneNumber = pn;
+        emailAddress = ea;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName) && Objects.equals(phoneNumber, contact.phoneNumber) && Objects.equals(emailAddress, contact.emailAddress);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, phoneNumber, emailAddress);
-    }
 }

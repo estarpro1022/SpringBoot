@@ -1,13 +1,9 @@
 package com.homework.dao;
 
 import com.homework.data.Contact;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface ContactRepository {
-    List<Contact> findAll();
-
-    void save(Contact contact);
-
-    void clear();
+@Repository
+public interface ContactRepository extends JpaRepository<Contact, Long> {
 }

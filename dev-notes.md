@@ -1,0 +1,105 @@
+# JPA & H2
+
+本次新增的maven dependency
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+对repository进行改写，只需继承`JpaRepository`就简化了很多开发工作量。不使用`CrudRepository`的原因是findAll方法返回类型为Iterable，功能较少，`JpaRepository`的findAll方法返回类型为List
+
+* 添加`@Repository`
+* interface接口类型
+
+```java
+@Repository
+public interface ContactRepository extends JpaRepository<Contact, Long> {
+}
+```
+
+# ComponentScan的excludeFilters(not solved)
+
+## 问题
+
+ContactConfig和ContactConfigAOP在同一目录下，都有@Configuration注解，并且使用excludeFilters过滤另一个Config。在Test测试类中引入ContactConfig的上下文，可是ContactConfigAOP仍然被扫到了，创建了切面，引入了新的行为。
+
+尝试使用FilterType的Annotation和ASSIGNABLE_TYPE过滤，无一生效
+
+```java
+@Configuration
+@ComponentScan(basePackages = "com.homework", excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = ContactConfigAOP.class))
+public class ContactConfig {
+}
+
+@Configuration
+@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = ContactConfig.class)})
+@EnableAspectJAutoProxy
+public class ContactConfigAOP {
+    @Bean
+    public DefaultContactAspect getDefaultContact() {
+        return new DefaultContactAspect();
+    }
+}
+
+// 测试类
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ContactConfig.class)
+public class ContactServiceTest {
+	...
+}
+```
+
+## 暂时的解决方法
+
+```java
+@ComponentScan
+public class ContactConfig {
+}
+
+@ComponentScan
+@EnableAspectJAutoProxy	// optional
+public class ContactConfigAOP {
+    @Bean
+    public DefaultContactAspect getDefaultContact() {
+        return new DefaultContactAspect();
+    }
+}
+```
+
+去掉`@Configuration` 。This will work.
+
+若在SpringBootApplication中引入Config类，只需要new一个配置类的Bean就行了
+
+拓展：即使去除`@EnableAspectJAutoProxy`注解，只要能扫描到`Aspect`类，AOP仍能正常运行。reference: [Spring AOP works without @EnableAspectJAutoProxy?](https://stackoverflow.com/questions/48625149/spring-aop-works-without-enableaspectjautoproxy)
+
+# @Id和@GeneratedValue——JPA
+
+我们给Contact的id标注@Id和@GeneratedValue(strategy = GenerationType.IDENTITY)，这样在每次创建Contact实例的时候，id就会自增1。那么我们就不需要手动指定id的值了。
+
+在处理表单post请求的时候，SpringBoot会将数据拼成Contact对象，虽然表单没有提供id的数据，id会自增1
+
+如果要手动构造Contact对象，我们新增如下构造器，并给类注解`@NoArgsConstructor`，在`new Contact("name", "name", "12312312312", "123@123.com")`的时候SpringBoot会自动帮我们给id加1
+
+```java
+public Contact(String fn, String ln, String pn, String ea) {
+    firstName = fn;
+    lastName = ln;
+    phoneNumber = pn;
+    emailAddress = ea;
+}
+```
+
