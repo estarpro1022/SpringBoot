@@ -9,24 +9,24 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Primary;
 
 import java.io.Serializable;
 
 @Data
 @Entity
-//@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor
 public class Contact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Size(min = 1, message = "姓名长度至少为1")
+    @Size(min = 1, max=50, message = "姓名长度至少为2")
     private String firstName;
 
     @NotNull
-    @Size(min = 1, message = "姓名长度至少为1")
+    @Size(min = 1, max=50, message = "姓名长度至少为1")
     private String lastName;
 
     @NotNull

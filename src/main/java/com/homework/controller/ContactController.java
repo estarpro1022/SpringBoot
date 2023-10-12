@@ -33,7 +33,6 @@ public class ContactController {
     @GetMapping
     public String getHome() {
         log.info("home view");
-        new Contact("name", "name", "number", "email");
         return "home";
     }
 
@@ -44,7 +43,6 @@ public class ContactController {
             return "home";
         }
 
-        contact.setId((long) (contactService.getAll().size() + 1));
         contactService.add(contact);
         log.info("add a Contact: " + contact);
         return "redirect:/";
