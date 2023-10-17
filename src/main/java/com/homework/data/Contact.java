@@ -1,25 +1,17 @@
 package com.homework.data;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.Primary;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 
 @Data
-@Entity
-@NoArgsConstructor
+@Document
 public class Contact implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @NotNull
     @Size(min = 1, max=50, message = "姓名长度至少为2")
@@ -37,12 +29,4 @@ public class Contact implements Serializable {
     @NotBlank(message = "邮箱不为空")
     @Email(message = "请输入有效邮箱")
     private String emailAddress;
-
-    public Contact(String fn, String ln, String pn, String ea) {
-        firstName = fn;
-        lastName = ln;
-        phoneNumber = pn;
-        emailAddress = ea;
-    }
-
 }

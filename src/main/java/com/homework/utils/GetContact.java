@@ -10,7 +10,6 @@ public class GetContact {
         List<Contact> contacts = new ArrayList<>();
 
         Contact contact1 = new Contact();
-        contact1.setId(1L);
         contact1.setFirstName("san");
         contact1.setLastName("zhang");
         contact1.setPhoneNumber("12345678901");
@@ -18,7 +17,6 @@ public class GetContact {
         contacts.add(contact1);
 
         Contact contact2 = new Contact();
-        contact2.setId(2L);
         contact2.setFirstName("si");
         contact2.setLastName("li");
         contact2.setPhoneNumber("12345678902");

@@ -1,5 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:contact
-    username: test
-    password: test
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
