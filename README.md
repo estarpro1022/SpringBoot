@@ -1,4 +1,4 @@
-﻿﻿﻿# Homework 07
+# Homework 07
 
 1. SpringBoot Security，给网页新增安全认证，用默认界面即可
 2. 使用embed mongodb做数据库存储
