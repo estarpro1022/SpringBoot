@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ContactServiceImpl implements ContactService {
@@ -21,7 +22,22 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public void add(Contact contact) {
-        contactRepository.save(contact);
+    public Optional<Contact> get(Long id) {
+        return contactRepository.findById(id);
+    }
+
+    @Override
+    public Contact add(Contact contact) {
+        return contactRepository.save(contact);
+    }
+
+    @Override
+    public Contact substitute(Contact contact) {
+        return contactRepository.save(contact);
+    }
+
+    @Override
+    public void delete(Long id) {
+        contactRepository.deleteById(id);
     }
 }
